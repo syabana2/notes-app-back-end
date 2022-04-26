@@ -1,0 +1,146 @@
+Contoh data schema.
+{
+  id: 'notes-V1StGXR8_Z5jdHi6B-myT',
+  title: 'Sejarah JavaScript',
+  createdAt: '2020-12-23T23:00:09.686Z',
+  updatedAt: '2020-12-23T23:00:09.686Z',
+  tags: ['NodeJS', 'JavaScript'],
+  body: 'JavaScript pertama kali dikembangkan oleh Brendan Eich dari Netscape di bawah nama Mocha, yang nantinya namanya diganti menjadi LiveScript, dan akhirnya menjadi JavaScript. Navigator sebelumnya telah mendukung Java untuk lebih bisa dimanfaatkan para pemrogram yang non-Java.',
+}
+
+Routes list = {
+  POST: {
+    /notes: {
+      request: {
+        "id": "UNIQUE CREATED BY SERVER",
+        "title": "Judul Catatan",
+        "tags": ["Tag 1", "Tag 2"],
+        "body": "Konten catatan",
+        "ceratedAt": "CREATED BY SERVER",
+        "updatedAt": "CREATED BY SERVER",
+      },
+      statusCode: 201 (created),
+      response: {
+        "status": "success",
+        "message": "Catatan berhasil ditambahkan",
+        "data": {
+          "noteId": "V09YExygSUYogwWJ" //diambil dari properti id
+        },
+      },
+      responseFailed: {
+        "status": "error",
+        "message": "Catatan gagal untuk ditambahkan"
+      },
+    },
+  },
+  GET: {
+    /notes: {
+      statusCode: 200 (ok),
+      response: {
+        "status": "success",
+        "data": {
+          "notes": [
+            {
+              "id":"notes-V1StGXR8_Z5jdHi6B-myT",
+              "title":"Catatan 1",
+              "createdAt":"2020-12-23T23:00:09.686Z",
+              "updatedAt":"2020-12-23T23:00:09.686Z",
+              "tags":[
+                "Tag 1",
+                "Tag 2"
+              ],
+              "body":"Isi dari catatan 1"
+            },
+            {
+              "id":"notes-V1StGXR8_98apmLk3mm1",
+              "title":"Catatan 2",
+              "createdAt":"2020-12-23T23:00:09.686Z",
+              "updatedAt":"2020-12-23T23:00:09.686Z",
+              "tags":[
+                "Tag 1",
+                "Tag 2"
+              ],
+              "body":"Isi dari catatan 2"
+            }
+          ]
+        }
+      },
+      responseNotFound: {
+        "status": "success",
+        "data": {
+          "notes": []
+        }
+      },
+    },
+    /notes/{id}: {
+      statusCode: 200 (ok),
+      resposne: {
+        "status": "success",
+        "data": {
+          "note": {
+            "id":"notes-V1StGXR8_Z5jdHi6B-myT",
+            "title":"Catatan 1",
+            "createdAt":"2020-12-23T23:00:09.686Z",
+            "updatedAt":"2020-12-23T23:00:09.686Z",
+            "tags":[
+              "Tag 1",
+              "Tag 2"
+            ],
+            "body":"Isi dari catatan 1"
+          }
+        }
+      },
+      responseNotFound: {
+        statusCode: 404 (not found),
+        response: {
+          "status": "fail",
+          "message": "Catatan tidak ditemukan"
+        }
+      },
+    },
+  },
+  PUT: {
+    /notes/{id}: {
+      request: {
+        "title":"Judul Catatan Revisi",
+        "tags":[
+          "Tag 1",
+          "Tag 2"
+        ],
+        "body":"Konten catatan"
+      },
+      responseSuccess: {
+        statusCode: 200 (ok),
+        response: {
+          "status": "success",
+          "message": "Catatan berhasil diperbaharui"
+        },
+      },
+      responseFailed: {
+        statusCode: 404 (not found),
+        response: {
+          "status": "fail",
+          "message": "Gagal memperbarui catatan. Id catatan tidak ditemukan"
+        },
+      },
+    },
+  },
+  DELETE: {
+    /notes/{id}: {
+      responseSuccess: {
+        statusCode: 200 (ok),
+        response: {
+          "status": "success",
+          "message": "Catatan berhasil dihapus"
+        },
+      },
+      responseFailed: {
+        statusCode: 404 (not found),
+        resposne: {
+          "status": "fail",
+          "message": "Catatan gagal dihapus. Id catatan tidak ditemukan"
+        },
+      },
+    },
+  },
+}
